@@ -1,20 +1,34 @@
-use std::path::Path;
-
+use std::{path::Path, fs::File};
 
 pub struct HidController {
-
+    fd: File,
+    sliders: Vec<f32>,
+    buttons: Vec<bool>
 }
 
 impl HidController {
-    pub fn new<P: AsRef<Path>>(_p: P) -> std::io::Result<HidController> {
-
+    pub fn new<P: AsRef<Path>>(p: P, num_sliders: usize, num_buttons: usize) -> std::io::Result<HidController> {
         Ok(HidController { 
-
+            fd: File::open(p)?,
+            sliders: vec![0f32; num_sliders],
+            buttons: vec![false; num_buttons]
         })
     }
 
-    // ref: 
-    // https://www.usb.org/sites/default/files/hid1_11.pdf
+    pub fn update(&mut self) {
+        // TODO
+        // refs: 
+        // https://www.usb.org/sites/default/files/hid1_11.pdf
+        // https://www.kernel.org/doc/html/latest/usb/gadget_hid.html
+    }
+
+    pub fn set_button(&mut self, id: usize, value: bool) {
+        self.buttons[id] = value;
+    }
+
+    pub fn set_slider(&mut self, id: usize, value: f32) {
+        self.sliders[id] = value;
+    }
 }
 
 mod tables {

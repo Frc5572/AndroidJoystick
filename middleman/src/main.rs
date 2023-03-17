@@ -6,5 +6,11 @@ mod hid_joystick;
 use hid_joystick::HidController;
 
 fn main() {
-    let controller = HidController::new("/dev/hidg0").unwrap();
+    let mut controller = HidController::new("/dev/hidg0", 0, 27).unwrap();
+
+    loop {
+        // TODO talk with adb
+
+        controller.update();
+    }
 }
