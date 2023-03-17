@@ -12,6 +12,9 @@ impl HidController {
 
         })
     }
+
+    // ref: 
+    // https://www.usb.org/sites/default/files/hid1_11.pdf
 }
 
 mod tables {
