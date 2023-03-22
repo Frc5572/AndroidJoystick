@@ -1,0 +1,6 @@
+1. Install adb and configure permissions (https://developer.android.com/studio/run/device#troubleshoot)
+  - add user to plugdev
+  - add udev rules (https://stackoverflow.com/questions/53887322/adb-devices-no-permissions-user-in-plugdev-group-are-your-udev-rules-wrong)
+2. Forward port 1234 via adb (https://stackoverflow.com/questions/49329919/no-consistent-way-to-connect-adb-over-tcp)
+3. Run app
+4. Run middleman (cargo run)

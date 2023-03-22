@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -22,64 +23,64 @@
                 android:id="@+id/l2c0"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
 
             <ImageButton
                 android:id="@+id/l2c1"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cone"
-                tools:srcCompat="@drawable/cone" />
+                app:srcCompat="@drawable/cube"
+                tools:srcCompat="@drawable/cube" />
 
             <ImageButton
                 android:id="@+id/l2c2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
 
             <ImageButton
                 android:id="@+id/l2c3"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
 
             <ImageButton
                 android:id="@+id/l2c4"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cone"
-                tools:srcCompat="@drawable/cone" />
+                app:srcCompat="@drawable/cube"
+                tools:srcCompat="@drawable/cube" />
 
             <ImageButton
                 android:id="@+id/l2c5"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
 
             <ImageButton
                 android:id="@+id/l2c6"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
-
-            <ImageButton
-                android:id="@+id/l2c7"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 app:srcCompat="@drawable/cone"
                 tools:srcCompat="@drawable/cone" />
 
             <ImageButton
-                android:id="@+id/l2c8"
+                android:id="@+id/l2c7"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 app:srcCompat="@drawable/cube"
                 tools:srcCompat="@drawable/cube" />
+
+            <ImageButton
+                android:id="@+id/l2c8"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
         </TableRow>
 
         <TableRow
@@ -90,64 +91,64 @@
                 android:id="@+id/l1c0"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
 
             <ImageButton
                 android:id="@+id/l1c1"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cone"
-                tools:srcCompat="@drawable/cone" />
+                app:srcCompat="@drawable/cube"
+                tools:srcCompat="@drawable/cube" />
 
             <ImageButton
                 android:id="@+id/l1c2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
 
             <ImageButton
                 android:id="@+id/l1c3"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
 
             <ImageButton
                 android:id="@+id/l1c4"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cone"
-                tools:srcCompat="@drawable/cone" />
+                app:srcCompat="@drawable/cube"
+                tools:srcCompat="@drawable/cube" />
 
             <ImageButton
                 android:id="@+id/l1c5"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
 
             <ImageButton
                 android:id="@+id/l1c6"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:srcCompat="@drawable/cube"
-                tools:srcCompat="@drawable/cube" />
-
-            <ImageButton
-                android:id="@+id/l1c7"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 app:srcCompat="@drawable/cone"
                 tools:srcCompat="@drawable/cone" />
 
             <ImageButton
-                android:id="@+id/l1c8"
+                android:id="@+id/l1c7"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 app:srcCompat="@drawable/cube"
                 tools:srcCompat="@drawable/cube" />
+
+            <ImageButton
+                android:id="@+id/l1c8"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/cone"
+                tools:srcCompat="@drawable/cone" />
         </TableRow>
 
         <TableRow
@@ -215,6 +216,7 @@
     </TableLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
@@ -231,7 +233,98 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/not_connected" />
+    </LinearLayout>
 
+    <SeekBar
+        android:id="@+id/rollers"
+        android:layout_width="714dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:max="200"
+        android:progress="100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+    <LinearLayout
+        android:layout_width="127dp"
+        android:layout_height="439dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tableLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/imageButton9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/cube" />
+
+        <ImageButton
+            android:id="@+id/imageButton8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/cube" />
+
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/cube" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="720dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rollers">
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/cube" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/cube" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/cube" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/cube" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

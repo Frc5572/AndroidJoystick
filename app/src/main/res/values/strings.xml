@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">projectowen</string>
+    <string name="connected">Connected</string>
+    <string name="not_connected">Not Connected</string>
 </resources>
