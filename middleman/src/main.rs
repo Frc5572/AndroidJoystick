@@ -10,7 +10,7 @@ use std::net::TcpStream;
 use std::time::Duration;
 
 fn main() {
-    let stream = TcpStream::connect("127.0.0.1:1234").unwrap();
+    let stream = TcpStream::connect("127.0.0.1:1235").unwrap();
     stream
         .set_read_timeout(Some(Duration::from_millis(10)))
         .unwrap();
@@ -21,16 +21,36 @@ fn main() {
             Ok(num_bytes_read) => {
                 if num_bytes_read > 0 {
                     match buf[0] {
+                        // grid
                         2 => {
                             let mut buf = [0u8; 2];
                             reader.read(&mut buf).unwrap();
                             println!("{:?}", buf);
                         }
+                        // intake slider
                         3 => {
                             let mut buf = [0u8; 8];
                             reader.read(&mut buf).unwrap();
                             let val = f64::from_be_bytes(buf);
                             println!("{:?}", val);
+                        }
+                        // home
+                        4 => {
+                            let mut buf = [0u8; 1];
+                            reader.read(&mut buf).unwrap();
+                            println!("{:?}", buf[0]);
+                        }
+                        // cone led
+                        5 => {
+                            let mut buf = [0u8; 1];
+                            reader.read(&mut buf).unwrap();
+                            println!("{:?}", buf[0]);
+                        }
+                        // cube led
+                        6 => {
+                            let mut buf = [0u8; 1];
+                            reader.read(&mut buf).unwrap();
+                            println!("{:?}", buf[0]);
                         }
                         _ => {}
                     }

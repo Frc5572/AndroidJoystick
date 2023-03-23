@@ -4,9 +4,11 @@ import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.ConditionVariable
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         private var cond = ConditionVariable()
         private var active = 0
         private var intake: Double = 0.0
+        private var home = false;
+        private var led_cone = false;
+        private var led_cube = false;
 
         private val buttons = intArrayOf(
             R.id.l0c0, R.id.l0c1, R.id.l0c2, R.id.l0c3, R.id.l0c4, R.id.l0c5, R.id.l0c6, R.id.l0c7, R.id.l0c8,
@@ -88,6 +93,24 @@ class MainActivity : AppCompatActivity() {
                         output.writeByte(3)
                         output.writeDouble(intake)
 
+                        // home
+                        output.writeByte(4);
+                        output.writeBoolean(home);
+
+                        home = false;
+
+                        // led cone
+                        output.writeByte(5)
+                        output.writeBoolean(led_cone)
+
+                        led_cone = false;
+
+                        // led cube
+                        output.writeByte(6)
+                        output.writeBoolean(led_cube)
+
+                        led_cube = false;
+
                         output.flush()
                         cond.close();
                     }
@@ -106,6 +129,21 @@ class MainActivity : AppCompatActivity() {
             intake = x
             cond.open()
         }
+
+        fun setHome() {
+            home = true;
+            cond.open();
+        }
+
+        fun setCone() {
+            led_cone = true;
+            cond.open();
+        }
+
+        fun setCube() {
+            led_cube = true;
+            cond.open()
+        }
     }
 
     private fun reset() {
@@ -122,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
-        val worker = SocketWorker(1234, this)
+        val worker = SocketWorker(1235, this)
         worker.start()
 
         val rollers = findViewById<SeekBar>(R.id.rollers);
@@ -141,6 +179,24 @@ class MainActivity : AppCompatActivity() {
             }
 
         });
+
+        val home_button = findViewById<ImageButton>(R.id.home);
+
+        home_button.setOnClickListener { btn ->
+            worker.setHome()
+        }
+
+        val cone_button = findViewById<ImageButton>(R.id.ledCone);
+
+        cone_button.setOnClickListener { btn ->
+            worker.setCone()
+        }
+
+        val cube_button = findViewById<ImageButton>(R.id.ledCube);
+
+        cube_button.setOnClickListener { btn ->
+            worker.setCube()
+        }
 
         buttons.forEach {
             val button = findViewById<ImageButton>(it)
