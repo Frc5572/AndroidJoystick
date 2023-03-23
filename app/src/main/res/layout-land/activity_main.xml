@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8b0000"
     tools:context=".MainActivity">
 
     <TableLayout
@@ -232,6 +233,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="@string/not_connected" />
     </LinearLayout>
 
@@ -300,29 +302,33 @@
 
         <ImageButton
             android:id="@+id/imageButton6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="74dp"
+            android:layout_height="68dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/cube" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/home" />
 
         <ImageButton
             android:id="@+id/imageButton5"
+            android:background="#8b0000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/cube" />
+            />
 
         <ImageButton
             android:id="@+id/imageButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/cube" />
+            app:srcCompat="@drawable/cone" />
 
         <ImageButton
             android:id="@+id/imageButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/cube" />
     </LinearLayout>
