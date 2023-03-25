@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Bridge extends Thread {
 
-    private static final int PORT = 1234;
+    public static final int PORT = 1234;
 
     public enum Side {
         Potato(false), Android(true);

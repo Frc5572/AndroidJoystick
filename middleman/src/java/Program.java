@@ -1,21 +1,13 @@
 package java;
-import edu.wpi.first.networktables.DoubleSubscriber;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.networktables.NetworkTableType;
 import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.networktables.NetworkTablesJNI;
-import edu.wpi.first.networktables.NetworkTable.TableEventListener;
 import edu.wpi.first.networktables.NetworkTableEvent.Kind;
 import edu.wpi.first.util.CombinedRuntimeLoader;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.EnumSet;
-import java.util.List;
 
 import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
@@ -27,8 +19,6 @@ import edu.wpi.first.util.WPIUtilJNI;
 import net.ffst.adbpotato.Bridge;
 
 public class Program {
-
-    private static final int PORT = 1235;
 
     public static void main(String[] args) throws IOException {
         String adbPath = "adb";
@@ -47,8 +37,6 @@ public class Program {
     private static NetworkTableValue msgPackToNT(MessageUnpacker unpacker) throws IOException {
         int len;
         byte[] bytes;
-        NetworkTableValue[] values;
-        String[] keys;
         switch(unpacker.getNextFormat()) {
             case UINT8:
             case UINT16:
@@ -157,7 +145,7 @@ public class Program {
     }
 
     public void run(String adbPath) throws IOException {
-        String tcpString = "tcp:" + PORT;
+        String tcpString = "tcp:" + Bridge.PORT;
         Runtime.getRuntime().exec(new String[] { adbPath, "forward", tcpString, tcpString });
         Bridge bridge = new Bridge(Bridge.Side.Potato);
         NetworkTableInstance inst = NetworkTableInstance.getDefault();
