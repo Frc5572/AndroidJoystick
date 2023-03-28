@@ -3,10 +3,16 @@ package com.example.projectowen;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.WorkManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 
 import net.ffst.adbpotato.Bridge;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +69,54 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstance);
         JoystickApp app = ((JoystickApp) getApplication());
         thread = new InnerThread(this, app);
+        // cone led control
+        findViewById(R.id.ledCone).setOnClickListener((btn) -> {
+            try {
+                app.bridge.publish("LED Cone", true);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        // cube led control
+        findViewById(R.id.ledCube).setOnClickListener((btn) -> {
+            try {
+                app.bridge.publish("LED Cube", true);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        findViewById(R.id.home).setOnClickListener((btn) -> {
+            try {
+                app.bridge.publish("Home", true);
+            } catch (IOException e){
+                throw new RuntimeException(e);
+            }
+        });
+        ((SeekBar)findViewById(R.id.rollers)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                try {
+                    app.bridge.publish("slider", seekBar.getProgress() / (double) seekBar.getMax() * 2.0 - 1.0);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekBar.setProgress(seekBar.getMax() / 2);
+                try {
+                    app.bridge.publish("slider", 0.0);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     @Override
@@ -75,5 +129,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-
+    public void gotoAuto(View v) {
+        startActivity(new Intent(MainActivity.this, AutoActivity.class));
+    }
 }
