@@ -15,7 +15,8 @@
         android:name="JoystickApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ScoringActivity"
+            android:noHistory="true"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>

@@ -150,6 +150,7 @@ public class Program {
         Bridge bridge = new Bridge(Bridge.Side.Potato);
         NetworkTableInstance inst = NetworkTableInstance.getDefault();
         NetworkTable table = inst.getTable("androidjoystick");
+        NetworkTable auto = inst.getTable("auto");
         inst.startClient4("example client");
         inst.setServer("10.55.72.2"); // where TEAM=190, 294, etc, or use inst.setServer("hostname") or similar
         // inst.startDSClient(); // recommended if running on DS computer; this gets the
@@ -175,6 +176,9 @@ public class Program {
                 e.printStackTrace();
             }
         });
+//        auto.addListener(EnumSet.of(Kind.kValueRemote), (tab, key, event) -> {
+//            System.out.println(key + "    " + event.valueData.value.getString());
+//        });
         bridge.start();
         while(true) {}
     }

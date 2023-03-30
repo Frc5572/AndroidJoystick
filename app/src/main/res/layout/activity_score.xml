@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8b0000"
-    tools:context=".MainActivity">
+    tools:context=".ScoringActivity">
 
     <TableLayout
         android:id="@+id/tableLayout"
@@ -264,18 +264,18 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
-            android:id="@+id/modeBtn"
+            android:id="@+id/imageButton9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/checkbox_off_background" />
+            app:srcCompat="@drawable/grid" />
 
         <ImageButton
             android:id="@+id/autoTab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/cube" />
+            app:srcCompat="@drawable/robot" />
 
         <ImageButton
             android:id="@+id/imageButton7"
@@ -291,7 +291,7 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <LinearLayout
+    <TableRow
         android:layout_width="720dp"
         android:layout_height="136dp"
         android:layout_marginStart="5dp"
@@ -308,29 +308,22 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/home" />
 
-        <ImageButton
-            android:id="@+id/imageButton5"
-            android:background="#8b0000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
 
         <ImageButton
             android:id="@+id/ledCone"
-            android:background="#ffffff"
-            android:layout_width="70dp"
-            android:layout_height="60dp"
+            android:layout_width="74dp"
+            android:layout_height="68dp"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/cone" />
 
         <ImageButton
             android:id="@+id/ledCube"
-            android:background="#ffffff"
-            android:layout_width="70dp"
-            android:layout_height="60dp"
+            android:layout_width="74dp"
+            android:layout_height="68dp"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
             app:srcCompat="@drawable/cube" />
-    </LinearLayout>
+    </TableRow>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

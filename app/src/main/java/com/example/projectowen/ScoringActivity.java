@@ -14,15 +14,15 @@ import net.ffst.adbpotato.Bridge;
 
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+public class ScoringActivity extends AppCompatActivity {
 
     private static class InnerThread extends Thread {
 
         private boolean running;
-        private final MainActivity activity;
+        private final ScoringActivity activity;
         private JoystickApp app;
 
-        private static final int buttonIds[] = new int[]{
+        public static final int buttonIds[] = new int[]{
                 R.id.l0c0, R.id.l1c0, R.id.l2c0,
                 R.id.l0c1, R.id.l1c1, R.id.l2c1,
                 R.id.l0c2, R.id.l1c2, R.id.l2c2,
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.l0c8, R.id.l1c8, R.id.l2c8,
         };
 
-        public InnerThread(MainActivity activity, JoystickApp app) {
+        public InnerThread(ScoringActivity activity, JoystickApp app) {
             this.activity = activity;
             this.app = app;
         }
@@ -65,33 +65,50 @@ public class MainActivity extends AppCompatActivity {
 
     private InnerThread thread;
 
+    @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+        setContentView(R.layout.activity_score);
         JoystickApp app = ((JoystickApp) getApplication());
         thread = new InnerThread(this, app);
+        thread.start();
         // cone led control
-        findViewById(R.id.ledCone).setOnClickListener((btn) -> {
+        this.findViewById(R.id.ledCone).setOnClickListener((btn) -> {
             try {
-                app.bridge.publish("LED Cone", true);
+                app.bridge.publish("LED Cone", 1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+        for (int col = 0; col < 9; col++) {
+            for (int level = 0; level < 3; level++) {
+                int finalLevel = level;
+                int finalCol = col;
+                findViewById(InnerThread.buttonIds[col * 3 + level]).setOnClickListener((btn) -> {
+                    app.setGridState(finalLevel, finalCol, GridState.Filled);
+                });
+            }
+        }
         // cube led control
-        findViewById(R.id.ledCube).setOnClickListener((btn) -> {
+        this.findViewById(R.id.ledCube).setOnClickListener((btn) -> {
             try {
-                app.bridge.publish("LED Cube", true);
+                app.bridge.publish("LED Cube", 1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-        findViewById(R.id.home).setOnClickListener((btn) -> {
+        this.findViewById(R.id.home).setOnClickListener((btn) -> {
             try {
-                app.bridge.publish("Home", true);
+                app.bridge.publish("Home", 1);
             } catch (IOException e){
                 throw new RuntimeException(e);
             }
         });
+        this.findViewById(R.id.autoTab).setOnClickListener((btn) -> {
+            finish();
+            setContentView(R.layout.activity_auto);
+        });
+
         ((SeekBar)findViewById(R.id.rollers)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -124,12 +141,14 @@ public class MainActivity extends AppCompatActivity {
         try {
             thread.end();
             thread.join();
-        } catch (InterruptedException ignored) {
+        } catch (InterruptedException x) {
+            throw new RuntimeException(x);
         }
         super.onDestroy();
     }
 
-    public void gotoAuto(View v) {
-        startActivity(new Intent(MainActivity.this, AutoActivity.class));
+    @Override
+    public void finish() {
+        onDestroy();
     }
 }
