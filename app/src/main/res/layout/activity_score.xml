@@ -251,20 +251,20 @@
     <LinearLayout
         android:layout_width="127dp"
         android:layout_height="439dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="-1dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tableLayout"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
-            android:id="@+id/imageButton9"
+            android:id="@+id/gridbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -277,18 +277,22 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/robot" />
 
-        <ImageButton
-            android:id="@+id/imageButton7"
+        <ToggleButton
+            android:id="@+id/gridmark"
+            android:textOn="TARGETING"
+            android:textOff="MARKING"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/cube" />
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1" />
+        <Button
+            android:id="@+id/confirm_button"
+            android:background="@drawable/roundedbutton"
+            android:layout_width="120dp"
+            android:layout_height="176dp"
+            android:layout_weight="1"
+            android:text="CONFIRM" />
     </LinearLayout>
 
     <TableRow

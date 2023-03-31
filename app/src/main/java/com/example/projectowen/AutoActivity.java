@@ -1,5 +1,6 @@
 package com.example.projectowen;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,11 +25,13 @@ public class AutoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_score);
+        setContentView(R.layout.activity_auto);
         thread = new InnerThread(this);
+        thread.start();
 
         this.findViewById(R.id.gridTab).setOnClickListener((btn) -> {
-            setContentView(R.layout.activity_score);
+            startActivity(new Intent(AutoActivity.this, ScoringActivity.class));
+            finish();
         });
 
     }
@@ -38,8 +41,8 @@ public class AutoActivity extends AppCompatActivity {
         try {
             thread.end();
             thread.join();
-        } catch (InterruptedException ignored) {
-
+        } catch (InterruptedException x) {
+            throw new RuntimeException(x);
         }
         super.onDestroy();
     }

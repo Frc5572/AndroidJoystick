@@ -64,6 +64,7 @@ public class ScoringActivity extends AppCompatActivity {
     }
 
     private InnerThread thread;
+    public boolean gridStatus = false;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -80,15 +81,6 @@ public class ScoringActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         });
-        for (int col = 0; col < 9; col++) {
-            for (int level = 0; level < 3; level++) {
-                int finalLevel = level;
-                int finalCol = col;
-                findViewById(InnerThread.buttonIds[col * 3 + level]).setOnClickListener((btn) -> {
-                    app.setGridState(finalLevel, finalCol, GridState.Filled);
-                });
-            }
-        }
         // cube led control
         this.findViewById(R.id.ledCube).setOnClickListener((btn) -> {
             try {
@@ -105,8 +97,8 @@ public class ScoringActivity extends AppCompatActivity {
             }
         });
         this.findViewById(R.id.autoTab).setOnClickListener((btn) -> {
+            startActivity(new Intent(ScoringActivity.this, AutoActivity.class));
             finish();
-            setContentView(R.layout.activity_auto);
         });
 
         ((SeekBar)findViewById(R.id.rollers)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -145,10 +137,5 @@ public class ScoringActivity extends AppCompatActivity {
             throw new RuntimeException(x);
         }
         super.onDestroy();
-    }
-
-    @Override
-    public void finish() {
-        onDestroy();
     }
 }
