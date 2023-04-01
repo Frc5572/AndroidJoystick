@@ -18,6 +18,7 @@ public class JoystickApp extends Application {
 
     public void setGridState(int level, int col, GridState state) {
         states[col * 3 + level] = state;
+
     }
 
     @Override

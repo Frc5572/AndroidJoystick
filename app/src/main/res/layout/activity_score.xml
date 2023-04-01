@@ -296,6 +296,7 @@
     </LinearLayout>
 
     <TableRow
+        android:id="@+id/hRow"
         android:layout_width="720dp"
         android:layout_height="136dp"
         android:layout_marginStart="5dp"

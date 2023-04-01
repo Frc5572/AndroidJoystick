@@ -1,5 +1,6 @@
 package net.ffst.adbpotato;
 
+
 import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessagePacker;
@@ -13,9 +14,25 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class Bridge extends Thread {
+
+    public static class Pair<A, B> {
+        public A first;
+        public B second;
+
+        public static <Ax, Bx> Pair<Ax, Bx> create(Ax a, Bx b) {
+            Pair<Ax, Bx> pair = new Pair<>();
+            pair.first = a;
+            pair.second = b;
+            return pair;
+        }
+    }
 
     public static final int PORT = 1235;
 
@@ -34,11 +51,13 @@ public class Bridge extends Thread {
         void update(String key, MessageUnpacker value);
     }
 
-    private List<Listener> listeners;
+    private List<Listener> listeners = new ArrayList<>();
 
     private volatile boolean running = false;
     private Side side;
     private DataOutputStream output;
+
+    private ArrayBlockingQueue<Pair<String, MessageBuffer>> buffersToPush = new ArrayBlockingQueue<>(20);
 
     public Bridge(Side side) throws IOException {
         this.side = side;
@@ -62,26 +81,35 @@ public class Bridge extends Thread {
                 } else {
                     socket = new Socket("127.0.0.1", PORT);
                 }
-                synchronized (output) {
-                    output = new DataOutputStream(socket.getOutputStream());
-                }
+                output = new DataOutputStream(socket.getOutputStream());
                 DataInputStream input = new DataInputStream(socket.getInputStream());
-                byte[] bytes = new byte[2048];
+                byte[] bytes = new byte[8192];
+                System.out.println("loop");
                 while(running) {
+                    buffersToPush.forEach((pair) -> {
+                        try {
+                            System.out.println("Writing " + pair.first);
+                            output.writeUTF(pair.first);
+                            byte[] buf = pair.second.array();
+                            output.writeInt(buf.length);
+                            output.write(buf);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    buffersToPush.clear();
+                    if (input.available() == 0) continue;
                     String key = input.readUTF();
                     int len = input.readInt();
                     int num = input.read(bytes, 0, len);
-                    if(num < 0) { // Occurs when socket closes
+                    if (num < 0) { // Occurs when socket closes
                         break;
                     }
                     MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(ByteBuffer.wrap(bytes, 0, len));
-                    for(Listener listener : listeners) {
+                    for (Listener listener : listeners) {
                         listener.update(key, unpacker);
                     }
                     unpacker.close();
-                }
-                synchronized (output) {
-                    output = null;
                 }
                 if (side.isServer) {
                     assert server != null;
@@ -111,15 +139,11 @@ public class Bridge extends Thread {
     }
 
     public void publish(String key, MessageBuffer buffer) throws IOException {
-        synchronized (output) {
-            output.writeUTF(key);
-            byte[] buf = buffer.array();
-            output.writeInt(buf.length);
-            output.write(buf);
-        }
+        buffersToPush.add(Pair.create(key, buffer));
     }
 
     public void publish(String key, double value) throws IOException {
+        System.out.println("publish " + key);
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
         packer.packDouble(value);
         packer.close();
@@ -127,6 +151,7 @@ public class Bridge extends Thread {
     }
 
     public void publish(String key, int value) throws IOException {
+        System.out.println("publish " + key);
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
         packer.packInt(value);
         packer.close();

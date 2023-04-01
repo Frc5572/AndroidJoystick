@@ -15,7 +15,7 @@ sourceSets {
     }
 }
 
-mainClassName = 'Program'
+mainClassName = 'middleman.Program'
 
 wpilibTools.deps.wpilibVersion = wpi.versions.wpilibVersion.get()
 
